@@ -10,6 +10,7 @@ import {
   X,
   GraduationCap,
 } from 'lucide-react';
+import PWAInstallButton from './PWAInstallButton';
 
 const navItems = [
   { path: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -106,8 +107,10 @@ export default function Sidebar() {
           })}
         </nav>
 
+        <PWAInstallButton />
+
         {/* Logout */}
-        <div className="p-4 border-t border-white/10">
+        <div className="p-4 border-t border-white/10 mt-auto">
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-teal-200 hover:bg-red-500/15 hover:text-red-300 
