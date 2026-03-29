@@ -5,6 +5,15 @@ export interface Fees {
   lastPaymentDate: string | null;
 }
 
+export interface Payment {
+  id: string;
+  studentId: string;
+  amount: number;
+  mode: 'Cash' | 'Online';
+  date: string;
+  note?: string;
+}
+
 export interface Student {
   id: string;
   name: string;

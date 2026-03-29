@@ -1,12 +1,13 @@
 import type { Student } from '../types';
-import { CreditCard, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { CreditCard, AlertCircle, CheckCircle2, IndianRupee } from 'lucide-react';
 
 interface Props {
   students: Student[];
   onUpdatePayment: (student: Student) => void;
+  onViewPayments: (student: Student) => void;
 }
 
-export default function FeesTable({ students, onUpdatePayment }: Props) {
+export default function FeesTable({ students, onUpdatePayment, onViewPayments }: Props) {
   return (
     <>
       {/* Desktop Table */}
@@ -69,21 +70,28 @@ export default function FeesTable({ students, onUpdatePayment }: Props) {
                         : '—'}
                     </td>
                     <td className="px-6 py-4 text-center">
-                      {isPaid ? (
-                        <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-green-100 text-green-600 text-xs font-bold">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          Paid
-                        </span>
-                      ) : (
+                      <div className="flex items-center justify-center gap-2">
+                        {isPaid ? (
+                          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-green-100 text-green-600 text-xs font-bold">
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            Paid
+                          </span>
+                        ) : (
+                          <button
+                            onClick={() => onUpdatePayment(student)}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl gradient-teal text-white text-xs font-bold btn-hover transition-all duration-200"
+                          >
+                            <CreditCard className="w-3.5 h-3.5" />
+                            Update
+                          </button>
+                        )}
                         <button
-                          onClick={() => onUpdatePayment(student)}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl gradient-teal text-white text-xs font-bold
-                          btn-hover transition-all duration-200"
+                          onClick={() => onViewPayments(student)}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 text-blue-600 text-xs font-bold hover:bg-blue-100 transition-colors"
                         >
-                          <CreditCard className="w-3.5 h-3.5" />
-                          Update
+                          <IndianRupee className="w-3.5 h-3.5" /> History
                         </button>
-                      )}
+                      </div>
                     </td>
                   </tr>
                 );
@@ -164,13 +172,19 @@ export default function FeesTable({ students, onUpdatePayment }: Props) {
               {!isPaid && (
                 <button
                   onClick={() => onUpdatePayment(student)}
-                  className="w-full py-2.5 rounded-xl gradient-teal text-white text-sm font-bold
-                  btn-hover flex items-center justify-center gap-2"
+                  className="w-full py-2.5 rounded-xl gradient-teal text-white text-sm font-bold btn-hover flex items-center justify-center gap-2 mb-2"
                 >
                   <CreditCard className="w-4 h-4" />
                   Update Payment
                 </button>
               )}
+              <button
+                onClick={() => onViewPayments(student)}
+                className="w-full py-2.5 rounded-xl bg-blue-50 text-blue-600 text-sm font-bold btn-hover flex items-center justify-center gap-2"
+              >
+                <IndianRupee className="w-4 h-4" />
+                View History
+              </button>
             </div>
           );
         })}

@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useStudents } from '../hooks/useStudents';
 import { useStats } from '../hooks/useStats';
 import FeesTable from '../components/FeesTable';
@@ -12,6 +13,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
 export default function FeesPage() {
+  const navigate = useNavigate();
   const { students, loading, recordPayment } = useStudents();
   const stats = useStats(students);
   const [paymentStudent, setPaymentStudent] = useState<Student | null>(null);
@@ -196,7 +198,11 @@ export default function FeesPage() {
           }
         />
       ) : (
-        <FeesTable students={filtered} onUpdatePayment={(s) => setPaymentStudent(s)} />
+        <FeesTable 
+          students={filtered} 
+          onUpdatePayment={(s) => setPaymentStudent(s)} 
+          onViewPayments={(s) => navigate(`/students/${s.id}/payments`)}
+        />
       )}
 
       {/* Payment Modal */}

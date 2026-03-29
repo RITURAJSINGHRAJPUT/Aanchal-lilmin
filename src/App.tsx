@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import StudentsPage from './pages/StudentsPage';
 import FeesPage from './pages/FeesPage';
+import StudentPaymentsPage from './pages/StudentPaymentsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/students" element={<StudentsPage />} />
             <Route path="/fees" element={<FeesPage />} />
+            <Route path="/students/:id/payments" element={<StudentPaymentsPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
